@@ -10,11 +10,14 @@
  */
 #include <string>
 #include "publisher.hpp"
+#include "subscriber.hpp"
 
 int main(int argc, char **argv) {
   ros::init(argc, argv, "main_node");
   // Initiate the string to be published
   std::string str = "ENPM808X, Fall 2018!";
+  // Create the Subscriber object
+  Subscriber sub;
   // Create the Publisher object
   Publisher pub;
   // Publish the message
