@@ -1,0 +1,6 @@
+[SHIVANG:~/catkin_ws/src/beginner_tutorials] > cpplint $( find . -name \*.hpp -or -name \*.cpp | grep -vE -e "^./build/" -e "^./vendor/" -e "^./docs/" -e "^./results" )
+Done processing ./include/publisher.hpp
+Done processing ./include/subscriber.hpp
+Done processing ./src/main.cpp
+Done processing ./src/subscriber.cpp
+Done processing ./src/publisher.cpp
