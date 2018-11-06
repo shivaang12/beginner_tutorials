@@ -1,0 +1,5 @@
+# Calling parameter of the service. 
+string text
+---
+# Response parameter of the service.
+bool response
