@@ -10,8 +10,7 @@
 #include "publisher.hpp"
 #include <string>
 
-Publisher::Publisher(const std::string& str) {
-  text_ = str;
+Publisher::Publisher(const std::string& str) : text_(str) {
   publisher_ = nh_.advertise<std_msgs::String>("chatter", 1000);
 }
 
@@ -40,8 +39,9 @@ auto Publisher::publish() -> void {
   }
 }
 
-auto Publisher::changeText(beginner_tutorials::text_change::Request& request,
-                beginner_tutorials::text_change::Response& resp) -> bool {
+auto Publisher::changeText(
+    beginner_tutorials::text_change::Request& request,
+    beginner_tutorials::text_change::Response& resp) -> bool {
     // Assign the string received from the service
     text_ = request.text;
     // Response of the service

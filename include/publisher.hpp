@@ -23,7 +23,7 @@ class Publisher {
   /**
    * @brief      Constructor of the class
    */
-  Publisher(const std::string& str);
+  explicit Publisher(const std::string& str);
   /**
    * @brief      This method publishes the passed string to chatter topic
    *
@@ -41,7 +41,8 @@ class Publisher {
    * @return     bool:     Returns true if service callback was successful
    */
   auto changeText(beginner_tutorials::text_change::Request& request,
-                  beginner_tutorials::text_change::Response& resp) -> bool;
+                  beginner_tutorials::text_change::Response& resp)
+      -> bool;
 
  private:
   ros::NodeHandle nh_;        ///< Node handle for the publisher node
