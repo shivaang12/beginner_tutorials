@@ -20,6 +20,10 @@ int main(int argc, char **argv) {
   ROS_INFO_STREAM("Initializing node: publisher...");
   // Initiate the string to be published
   std::string str = "Welcome to ENPM808X, Fall 2018!";
+  if (argc > 1) {
+    // Initialize the message with string coming from launch file
+    str = argv[1];
+  }
   // Node handle for publisher node
   ros::NodeHandle nh;
   // Create the Publisher object
