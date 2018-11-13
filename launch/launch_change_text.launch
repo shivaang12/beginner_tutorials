@@ -1,7 +1,9 @@
 <launch>
     <arg name="str" default="ENPM808X is an online project."/>
+    <arg name="record" default="false"/>
 
     <node pkg="beginner_tutorials" name="publisher" type="publisher_node" output="screen" args="$(arg str)" />
 
     <node pkg="beginner_tutorials" name="subscriber" type="subscriber_node" output="screen" />
+    <node pkg="rosbag" name="recorder_bag" type="record" args="--all --output-name=$(find beginner_tutorials)/results/publisher.bag" if="$(arg record)" />
 </launch>
