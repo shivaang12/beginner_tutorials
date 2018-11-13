@@ -1,0 +1,6 @@
+<launch>
+  <arg name="str" default="Launching-from-launch-file."/>
+  
+  <node pkg="beginner_tutorials" name="publisher" type="publisher_node" output="screen" args="$(arg str)" />
+  <test pkg="beginner_tutorials" test-name="publisherTest" type="pubTest" />
+</launch>
