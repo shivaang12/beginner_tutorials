@@ -206,3 +206,27 @@ target_link_libraries(subscriber_node
 
 ## Add folders to be run by python nosetests
 # catkin_add_nosetests(test)
+
+if(CATKIN_ENABLE_TESTING)
+  find_package(rostest REQUIRED)
+
+  add_rostest_gtest(
+    pubTest
+    launch/pub_test.launch
+    test/main.cpp
+    test/test_service.cpp
+    test/test_transform.cpp
+    )
+
+  target_link_libraries(
+    pubTest
+    ${catkin_LIBRARIES}
+    )
+
+  add_dependencies(
+    pubTest
+    publisher_node
+    ${PROJECT_NAME}_generate_messages_cpp
+    ${catkin_EXPORTED_TARGETS}
+    )
+endif()
