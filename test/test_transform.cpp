@@ -48,10 +48,10 @@ TEST(TESTSuite, transformTest) {
     // Create transform object to store the published transform
     tf::StampedTransform transform;
     // Wait till the transform is published
-    if (listener.waitForTransform("world", "publisher", ros::Time(0),
+    if (listener.waitForTransform("world", "talk", ros::Time(0),
                                   ros::Duration(100))) {
         // Get the value of the published transform
-        listener.lookupTransform("world", "publisher", ros::Time(0), transform);
+        listener.lookupTransform("world", "talk", ros::Time(0), transform);
 
         // Check the values of the published transform
         EXPECT_EQ(2.0, transform.getOrigin().x());

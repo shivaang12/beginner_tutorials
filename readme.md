@@ -116,7 +116,7 @@ TF transforms are the way to define coordinate transforms between various frames
 
 Ensure that `publisher_node` is already running. It can be started using the instructions given in the earlier sections. Now to see the transform being broadcasted, execute the following command:
 ```
-<home>$ rosrun tf tf_echo /publiher /world
+<home>$ rosrun tf tf_echo /world /talk
 ``` 
 Here, the first frame is the parent frame while the second frame is the child frame. The output after executing the above command looks like below:
 ```

@@ -64,7 +64,7 @@ auto Publisher::publish() -> void {
     }
     // Broadcast transform between world and publisher frames
     tf_br.sendTransform(tf::StampedTransform(transform, ros::Time::now(),
-                                             "world", "publisher"));
+                                             "world", "talk"));
     // Assign the string to message
     msg.data = text_;
     // Publish the message
