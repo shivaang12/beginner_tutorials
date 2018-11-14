@@ -50,7 +50,7 @@ After any updates to workspace, `source <path to workspace>/devel/setup.bash` co
 The code can be built by cloning the repository:
 ```
 <home>$ cd <workspace>/src
-<workspace>/src$ git clone https://github.com/shivaang12/beginner_tutorials.git
+<workspace>/src$ git clone https://github.com/shivaang12/beginner_tutorials/tree/Week11_HW
 <workspace>/src$ cd ..
 <workspace>$ catkin_make 
 ```
@@ -100,11 +100,92 @@ Note: parameter to launch file, the string should be a single cannot contain whi
 ### Calling the service 
 Service can also be called from the *terminal* when both the nodes are running (refereing to this package). This is necessary because *publisher* node is the server for service while *subscriber* node is client of the service. To call the service both server and client should be run properly.
 ```
-<home>$ rosservice call /text_change <string to be published>
+<home>$ rosservice call /change_text <string to be published>
 ```
 
 For this package, it can be done as follows:
 ```
-<home>$ rosservice call /text_change "This is America."
+<home>$ rosservice call /change_text "This is America."
 ```
 
+### TF transform
+TF transforms are the way to define coordinate transforms between various frames in ROS. The publisher node publishes a non-zero transformation between `world` and `publisher` frames. The easiest to check if the transforms are being broadcasted between the two frames is using `tf_echo` command. To get the more detailed information about transforms between all the frames and how they are connected, `view_frames` or `rqt_tf_tree` command is used.
+
+Ensure that `publisher_node` is already running. It can be started using the instructions given in the earlier sections. Now to see the transform being broadcasted, execute the following command:
+```
+<home>$ rosrun tf tf_echo /publiher /world
+``` 
+Here, the first frame is the parent frame while the second frame is the child frame. The output after executing the above command looks like below:
+```
+At time 1542150435.708
+- Translation: [1.998, 1.003, -1.000]
+- Rotation: in Quaternion [0.000, 0.000, 1.000, -0.001]
+            in RPY (radian) [0.000, 0.000, -3.140]
+            in RPY (degree) [0.000, 0.000, -179.909]
+At time 1542150436.708
+- Translation: [1.998, 1.003, -1.000]
+- Rotation: in Quaternion [0.000, 0.000, 1.000, -0.001]
+            in RPY (radian) [0.000, 0.000, -3.140]
+            in RPY (degree) [0.000, 0.000, -179.909]
+At time 1542150437.708
+- Translation: [1.998, 1.003, -1.000]
+- Rotation: in Quaternion [0.000, 0.000, 1.000, -0.001]
+            in RPY (radian) [0.000, 0.000, -3.140]
+            in RPY (degree) [0.000, 0.000, -179.909]
+```
+To generate a PDF containing the connections between various frames assuming publisher node is already running,
+```
+<home>$ rosrun rqt_tf_tree rqt_tf_tree
+```
+
+Or use following,
+```
+<home>$ rosrun tf view_frames
+```
+## Testing using rostest/gtest 
+Integration testing is very important to ensure that the newly created or modified modules does not break the running version of the code. This module has two unit tests which ensure that `change_text` service is running and that the transform being boradcasted is as expected. 
+
+There are two ways to run the tests, one way is by using `catkin_make` and another way by using `rostest`. Before running the tests, ensure that `catkin_make` is invoked to build the units that are not being tested. The tests can be run using either of the following commands:
+#### Using catkin_make 
+```
+<home>$ cd <path to directory>/catkin_ws
+<workspace>$ catkin_make run_tests_beginner_tutorials
+```
+
+#### Using rostest
+```
+<home>$ rostest beginner_tutorials publisher_test.launch
+```
+The output might look like this:
+```
+[Testcase: testpublisherTest] ... ok
+
+[ROSTEST]-----------------------------------------------------------------------
+
+[beginner_tutorials.rosunit-publisherTest/serviceTest][passed]
+[beginner_tutorials.rosunit-publisherTest/transformTest][passed]
+
+SUMMARY
+ * RESULT: SUCCESS
+ * TESTS: 2
+ * ERRORS: 0
+ * FAILURES: 0
+
+rostest log file is in /home/shivang/.ros/log/rostest-shivang-Latitude-E5270-10147.log
+```
+
+## Recording/Playing rosbag
+`rosbag` allows to record all the data that is being published across all the nodes. Bag files are very useful when one wants to debug what is happening on the robot. However, rosbag does not record calls to services as well as responses of the services. 
+It can be recorded from the commandline using `rosbag record -a`. And the recorded bag file can be played using `rosbag play <path to bag file>`.
+
+Before proceeding to play the bag file, ensure that subscriber node is running as per the instructions given the earlier sections. Now to play the `publisher.bag` file located in `results/`:
+```
+<home>$ rosbag play catkin_ws/src/beginner_tutorials/results/publisher.bag
+```
+
+This command will start playing the recorded bag file and the subscriber node which was running previously will be able to listen to the data that is being published. One can check the transform being broadcasted using the instructions given before. 
+
+`launch_change_text.launch` launch file of this package accepts a flag `record` that can be used to record the bag file which will record all the data that is being published on the `chatter` topic. It will save the file in `results` directory. This can be done using following commands:
+```
+<home>$ roslaunch beginner_tutorials launch_change_text.launch record:=true
+```
