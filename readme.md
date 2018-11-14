@@ -50,7 +50,10 @@ After any updates to workspace, `source <path to workspace>/devel/setup.bash` co
 The code can be built by cloning the repository:
 ```
 <home>$ cd <workspace>/src
-<workspace>/src$ git clone https://github.com/shivaang12/beginner_tutorials/tree/Week11_HW
+<workspace>/src$ git clone https://github.com/shivaang12/beginner_tutorials.git
+<workspace>/src$ cd beginner_tutorials
+<workspace>/src$ git checkout Week11_HW
+<workspace>/src$ cd ..
 <workspace>/src$ cd ..
 <workspace>$ catkin_make 
 ```
