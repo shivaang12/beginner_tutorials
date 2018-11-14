@@ -37,9 +37,9 @@
  *
  */
 int main(int argc, char **argv) {
-  // Initialize ROS
-  ros::init(argc, argv, "pubTest");
-  // Run gtest suite
-  ::testing::InitGoogleTest(&argc, argv);
-  return RUN_ALL_TESTS();
+    // Initialize ROS
+    ros::init(argc, argv, "pubTest");
+    // Run gtest suite
+    ::testing::InitGoogleTest(&argc, argv);
+    return RUN_ALL_TESTS();
 }

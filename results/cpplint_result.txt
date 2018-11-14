@@ -1,6 +1,12 @@
+Done processing ./test/main.cpp
+Done processing ./test/test_service.cpp
+Done processing ./test/test_transform.cpp
+./include/publisher.hpp:67:  Is this a non-const reference? If so, make const or use a pointer: beginner_tutorials::text_change::Request &request  [runtime/references] [2]
+./include/publisher.hpp:68:  Is this a non-const reference? If so, make const or use a pointer: beginner_tutorials::text_change::Response &resp  [runtime/references] [2]
 Done processing ./include/publisher.hpp
 Done processing ./include/subscriber.hpp
 Done processing ./src/subscriber.cpp
 Done processing ./src/pub_main.cpp
 Done processing ./src/publisher.cpp
 Done processing ./src/sub_main.cpp
+Total errors found: 2

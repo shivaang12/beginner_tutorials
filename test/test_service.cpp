@@ -30,11 +30,11 @@
  *
  */
 
-#include "beginner_tutorials/text_change.h"
-#include "publisher.hpp"
 #include <gtest/gtest.h>
 #include <ros/ros.h>
 #include <ros/service_client.h>
+#include "beginner_tutorials/text_change.h"
+#include "publisher.hpp"
 
 /**
  * @brief      Unit test for change_text service. Checks if the service exists
@@ -43,12 +43,12 @@
  */
 
 TEST(TESTSuite, serviceTest) {
-  // Create node handle
-  ros::NodeHandle nh;
-  // Create client for the change_text service
-  ros::ServiceClient client =
-      nh.serviceClient<beginner_tutorials::text_change>("change_text");
-  // Check if the service exists
-  bool exists(client.waitForExistence(ros::Duration(10)));
-  EXPECT_TRUE(exists);
+    // Create node handle
+    ros::NodeHandle nh;
+    // Create client for the change_text service
+    ros::ServiceClient client =
+        nh.serviceClient<beginner_tutorials::text_change>("change_text");
+    // Check if the service exists
+    bool exists(client.waitForExistence(ros::Duration(10)));
+    EXPECT_TRUE(exists);
 }

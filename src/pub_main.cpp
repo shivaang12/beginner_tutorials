@@ -9,8 +9,8 @@
 // copies of the Software, and to permit persons to whom the Software is
 // furnished to do so, subject to the following conditions:
 
-// The above copyright notice and this permission notice shall be included in all
-// copies or substantial portions of the Software.
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
 
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 // IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
@@ -36,28 +36,28 @@
 #include "publisher.hpp"
 
 int main(int argc, char **argv) {
-  // Create publisher node
-  ros::init(argc, argv, "publisher");
-  // Inform that the publisher node is started
-  ROS_INFO_STREAM("Initializing node: publisher...");
-  // Initiate the string to be published
-  std::string str = "Welcome to ENPM808X, Fall 2018!";
-  if (argc > 1) {
-    // Initialize the message with string coming from launch file
-    str = argv[1];
-  }
-  // Node handle for publisher node
-  ros::NodeHandle nh;
-  // Create the Publisher object
-  Publisher pub(str);
-  // Create server for service change_text
-  ros::ServiceServer server =
-      nh.advertiseService("change_text", &Publisher::changeText, &pub);
-  // Inform that service is started
-  ROS_INFO_STREAM("Service started: change_text");
+    // Create publisher node
+    ros::init(argc, argv, "publisher");
+    // Inform that the publisher node is started
+    ROS_INFO_STREAM("Initializing node: publisher...");
+    // Initiate the string to be published
+    std::string str = "Welcome to ENPM808X, Fall 2018!";
+    if (argc > 1) {
+        // Initialize the message with string coming from launch file
+        str = argv[1];
+    }
+    // Node handle for publisher node
+    ros::NodeHandle nh;
+    // Create the Publisher object
+    Publisher pub(str);
+    // Create server for service change_text
+    ros::ServiceServer server =
+        nh.advertiseService("change_text", &Publisher::changeText, &pub);
+    // Inform that service is started
+    ROS_INFO_STREAM("Service started: change_text");
 
-  // Publish the message
-  pub.publish();
+    // Publish the message
+    pub.publish();
 
-  return 0;
+    return 0;
 }
